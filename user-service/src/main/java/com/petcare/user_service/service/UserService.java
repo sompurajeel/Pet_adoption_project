@@ -83,4 +83,25 @@ public class UserService {
                 .orElseThrow(() ->
                         new RuntimeException("User not found"));
     }
+    // Update User Profile
+public User updateUser(Long id, User updatedUser) {
+
+    User existingUser = userRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("User not found"));
+
+    existingUser.setName(updatedUser.getName());
+    existingUser.setPhone(updatedUser.getPhone());
+
+    // Update password only if a new password is provided
+    if (updatedUser.getPassword() != null
+            && !updatedUser.getPassword().isBlank()) {
+
+        existingUser.setPassword(
+                passwordEncoder.encode(updatedUser.getPassword())
+        );
+    }
+
+    return userRepository.save(existingUser);
+}
 }
