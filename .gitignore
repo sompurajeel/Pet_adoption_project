@@ -1,0 +1,11 @@
+# Maven
+**/target/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Environment / secrets
+.env
+*.env
