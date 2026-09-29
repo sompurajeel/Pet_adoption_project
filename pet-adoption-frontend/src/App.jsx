@@ -1,157 +1,200 @@
+import { useState } from "react";
 import "./App.css";
-import buddyImg from "./assets/buddy.jpg";
-import miloImg from "./assets/milo.jpg";
-import rockyImg from "./assets/rocky.jpg";
 
 function App() {
-  const pets = [
-    {
-      id: 1,
-      name: "Buddy",
-      type: "Dog",
-      breed: "Golden Retriever",
-      age: "2 Years",
-      image: buddyImg,
-    },
-    {
-      id: 2,
-      name: "Milo",
-      type: "Cat",
-      breed: "Persian",
-      age: "1 Year",
-      image: miloImg,
-    },
-    {
-      id: 3,
-      name: "Rocky",
-      type: "Dog",
-      breed: "Labrador",
-      age: "3 Years",
-      image: rockyImg,
-    },
-  ];
+  const [page, setPage] = useState("home");
 
   return (
-    <div className="app">
-
+    <div>
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="logo">🐾 Pet Adoption</div>
 
         <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#pets">Pets</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <button onClick={() => setPage("home")}>Home</button>
+          <button onClick={() => setPage("pets")}>Pets</button>
+          <button onClick={() => setPage("about")}>About</button>
+          <button onClick={() => setPage("login")}>Login</button>
+          <button onClick={() => setPage("register")}>Register</button>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="hero" id="home">
-        <div className="hero-content">
-          <p className="small-title">FIND YOUR NEW BEST FRIEND</p>
-
-          <h1>
-            Give a Pet a <span>Forever Home</span>
-          </h1>
+      {/* HOME PAGE */}
+      {page === "home" && (
+        <section className="hero">
+          <h1>Find Your New Best Friend 🐶🐱</h1>
 
           <p>
-            Every pet deserves love, care and a happy family.
-            Find your perfect companion and give them a loving home.
+            Give a loving pet a forever home and make a difference.
           </p>
 
-          <a href="#pets" className="hero-button">
-            Find a Pet ❤️
-          </a>
-        </div>
-      </section>
-
-      {/* PETS */}
-      <section className="pets-section" id="pets">
-        <div className="section-heading">
-          <p>MEET OUR FRIENDS</p>
-          <h2>Pets Looking for a Home</h2>
-          <span>
-            These lovely pets are waiting for someone like you.
-          </span>
-        </div>
-
-        <div className="pet-container">
-          {pets.map((pet) => (
-            <div className="pet-card" key={pet.id}>
-
-              <div className="pet-image">
-                <img src={pet.image} alt={pet.name} />
-              </div>
-
-              <div className="pet-info">
-                <h3>{pet.name}</h3>
-
-                <p>
-                  <strong>Type:</strong> {pet.type}
-                </p>
-
-                <p>
-                  <strong>Breed:</strong> {pet.breed}
-                </p>
-
-                <p>
-                  <strong>Age:</strong> {pet.age}
-                </p>
-
-                <button className="adopt-button">
-                  Adopt Me ❤️
-                </button>
-              </div>
-
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section className="about-section" id="about">
-        <div className="about-content">
-          <p className="about-title">ABOUT US</p>
-
-          <h2>We Help Pets Find Loving Families</h2>
-
-          <p>
-            Our Pet Adoption Platform connects loving people with
-            pets looking for a safe and caring home.
-          </p>
-
-          <p>
-            Browse available pets, learn about them and start your
-            adoption journey today.
-          </p>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section className="contact-section" id="contact">
-        <div className="contact-content">
-          <p className="contact-title">GET IN TOUCH</p>
-
-          <h2>Have Questions?</h2>
-
-          <p>
-            Contact us to know more about pet adoption.
-          </p>
-
-          <a
-            href="mailto:petadoption@gmail.com"
-            className="email-button"
+          <button
+            className="main-btn"
+            onClick={() => setPage("pets")}
           >
-            ✉ petadoption@gmail.com
-          </a>
-        </div>
-      </section>
+            Browse Pets
+          </button>
+        </section>
+      )}
+
+      {/* PETS PAGE */}
+      {page === "pets" && (
+        <section className="page-section">
+          <h2>🐾 Available Pets</h2>
+
+          <div className="pet-grid">
+
+            {/* BUDDY */}
+            <div className="pet-card">
+              <img
+                src="/images/buddy.jpg"
+                alt="Buddy"
+              />
+
+              <h3>Buddy</h3>
+
+              <p>Friendly Dog</p>
+
+              <button>View Details</button>
+            </div>
+
+            {/* MILO */}
+            <div className="pet-card">
+              <img
+                src="/images/milo.jpg"
+                alt="Milo"
+              />
+
+              <h3>Milo</h3>
+
+              <p>Playful Cat</p>
+
+              <button>View Details</button>
+            </div>
+
+            {/* ROCKY */}
+            <div className="pet-card">
+              <img
+                src="/images/rocky.jpg"
+                alt="Rocky"
+              />
+
+              <h3>Rocky</h3>
+
+              <p>Active Dog</p>
+
+              <button>View Details</button>
+            </div>
+
+          </div>
+        </section>
+      )}
+
+      {/* LOGIN PAGE */}
+      {page === "login" && (
+        <section className="form-section">
+
+          <h2>Login</h2>
+
+          <input
+            type="email"
+            placeholder="Enter Email"
+          />
+
+          <input
+            type="password"
+            placeholder="Enter Password"
+          />
+
+          <button className="main-btn">
+            Login
+          </button>
+
+          <p>
+            Don't have an account?{" "}
+            <span onClick={() => setPage("register")}>
+              Register
+            </span>
+          </p>
+
+        </section>
+      )}
+
+      {/* REGISTER PAGE */}
+      {page === "register" && (
+        <section className="form-section">
+
+          <h2>Create Account</h2>
+
+          <input
+            type="text"
+            placeholder="Full Name"
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+          />
+
+          <input
+            type="text"
+            placeholder="Phone Number"
+          />
+
+          <input
+            type="text"
+            placeholder="Address"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+          />
+
+          <button className="main-btn">
+            Register
+          </button>
+
+          <p>
+            Already have an account?{" "}
+            <span onClick={() => setPage("login")}>
+              Login
+            </span>
+          </p>
+
+        </section>
+      )}
+
+      {/* ABOUT PAGE */}
+      {page === "about" && (
+        <section className="page-section about">
+
+          <h2>About Pet Adoption</h2>
+
+          <p>
+            Our Pet Adoption Platform connects pet adopters
+            with shelters and helps users find loving pets
+            for adoption.
+          </p>
+
+          <p>
+            Users can search pets, view pet details,
+            submit adoption requests and access pet-care
+            services.
+          </p>
+
+        </section>
+      )}
 
       {/* FOOTER */}
       <footer>
-        <p>🐾 Pet Adoption Platform</p>
-        <p>© 2026 Pet Adoption. All Rights Reserved.</p>
+
+        <p>📧 petadoption@gmail.com</p>
+
+        <p>
+          © 2026 Pet Adoption Platform
+        </p>
+
       </footer>
 
     </div>

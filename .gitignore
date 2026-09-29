@@ -1,5 +1,7 @@
 # Maven
 **/target/
+shelter-service/target/
+*-service/target/
 
 # IDE
 .vscode/
